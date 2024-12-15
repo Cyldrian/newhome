@@ -25,21 +25,33 @@ SECRET_KEY = '@gb7ip8+7p&wvbhb230m*-xhe3fuhv4e744us=6ip4z%!3u-_+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: list = []
+ALLOWED_HOSTS: list = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'suit',
+    'grappelli.dashboard',
+    'grappelli',
+    'adminsortable2',
+
+
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
+    'ckeditor',
+    'ckeditor_uploader',
+
+    'django_bootstrap_breadcrumbs',
+    'view_breadcrumbs',
+
     'main',
+    'django_thumbs',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -80,7 +93,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+
+    },
+    # 'test': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'db',
+    #     'USER': 'admin',
+    #     'PASSWORD': 'root',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '1234',
+    # }
 }
 
 
@@ -122,3 +144,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR+'/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR+'/media/'
+
+# Работает только для английского языка
+GRAPPELLI_ADMIN_TITLE = "Страница администрирования"
+GRAPPELLI_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
+
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
